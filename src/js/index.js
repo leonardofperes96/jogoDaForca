@@ -121,9 +121,90 @@ const palavras = [
   }),
 ];
 
-sortearPalavra();
-function sortearPalavra() {
-  const indexPalavra = parseInt(Math.random() * palavras.length);
-  const palavraSecreta = palavras[indexPalavra].name;
-  console.log(palavraSecreta);
+// Elementos utilizados para manipulação do DOM;
+
+const allButtons = document.querySelectorAll('[data-palavra-button]');
+const categoriaDiv = document.querySelector('[data-palavra-categoria]');
+const palavraSorteadaContainer = document.querySelector(
+  '[data-palavra-sorteada]',
+);
+const palavraErradaContainer = document.querySelector('[data-palavra-errada]');
+
+// Sortear index da palavra e categoria secreta
+const palavraIndex = parseInt(Math.random() * palavras.length);
+
+// Obter palavra e categoria secreta
+const palavraSorteada = palavras[palavraIndex].name;
+const categoriaSorteada = palavras[palavraIndex].category;
+console.log(palavraSorteada);
+
+//Array Dinamico de Palavras;
+let novoArrayDinamico = [];
+let letrasErradas = [];
+
+// Funções
+
+// Função para inciar o jogo
+
+function startGame() {
+  const arrayStart = palavraSorteada.split('');
+
+  arrayStart.forEach((letra) => {
+    palavraSorteadaContainer.innerHTML += `<span>_</span>`;
+  });
 }
+// Função para começar o jogo;
+startGame();
+
+// Mostrar a categoria sorteada
+function appendCategory(categoriaSorteada) {
+  categoriaDiv.innerHTML = `<h2>Dica : ${categoriaSorteada}</h2>`;
+}
+appendCategory(categoriaSorteada);
+
+// Função para mostrar na tela a letra
+function mostrarLetraTela(letra, arrayPalavraSorteada) {
+  palavraSorteadaContainer.innerHTML = '';
+
+  arrayPalavraSorteada.forEach((letra) => {
+    if (novoArrayDinamico.includes(letra)) {
+      palavraSorteadaContainer.innerHTML += `<span>${letra}</span>`;
+    } else {
+      palavraSorteadaContainer.innerHTML += `<span>_</span>`;
+    }
+  });
+}
+
+// Função para mostrar letras erradas
+
+function mostrarLetraErrada(letra) {
+  palavraErradaContainer.innerHTML = '';
+
+  letrasErradas.forEach((letra) => {
+    palavraErradaContainer.innerHTML += `<span>${letra}</span>`;
+  });
+}
+
+// Função para o evento de clique
+
+function handleClick(e) {
+  let letra = e.target.innerText;
+
+  //Transformar a palavra sorteada e a categirua em um array com cada letra da palavra;
+  const arrayPalavraSorteada = palavraSorteada.split('');
+
+  // Mostrar palavra sorteada na tela
+  if (arrayPalavraSorteada.includes(letra)) {
+    novoArrayDinamico.push(letra);
+    mostrarLetraTela(letra, arrayPalavraSorteada);
+  } else {
+    letrasErradas.push(letra);
+    mostrarLetraErrada(letra);
+  }
+}
+
+//Eventos
+
+allButtons.forEach((btn) => {
+  btn.addEventListener('click', handleClick);
+});

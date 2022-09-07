@@ -5,66 +5,101 @@
 }
 
 body {
-  background: #f7b002;
+  background: linear-gradient(90deg, #ea4900 0%, #f4c100 100%);
+  min-height: 100vh;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
 }
 
-#mainContent {
-  padding: 1rem 2rem;
+#main-content {
+  width: 600px;
+  max-width: 100%;
   display: flex;
+  margin: 1rem auto;
+  flex-direction: column;
   justify-content: center;
+  justify-items: center;
   align-items: center;
-  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+#main-content h1{
+  font-size: 3rem;
+}
+
+#imagem-categoria-container{
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+#categoria-container{
+  display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-top: 2rem;
+  justify-content: start;
 }
 
-#img img{
-  max-width: 100%;
+#categoria-container h2{
+font-size: 2rem;
+}
+
+#categoria-palavras {
+  font-size: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+#palavra-sorteada{
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#palavra-sorteada span {
   display: block;
 }
 
-#palavra{
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.letras {
-  padding: 0.5rem 1rem;
-  border-bottom: 1px solid #333;
-}
+/* #palavra-sorteada span:nth-child(1n)::after{
+  content: '';
+  border: 1px solid white;
+  width: 1.75rem;
+  top: 35px;
+  margin-left: -1.5rem;
+  position: absolute;
+} */
 
 #teclado {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
   margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .teclas {
   display: flex;
   gap: 0.25rem;
-  align-items: center;
-  justify-content: center;
 }
 
-.teclas button{
-  padding: 0.5rem 1rem;
-  background: purple;
-  border: 3px solid purple;
-  border-radius: 2px;
-  color: white;
-  transition: .4s;
-  cursor: pointer;
-}
-
-.teclas button:hover {
+.teclas button {
+  padding: 0.25rem 1rem;
+  font-size: 1.25rem;
+  border: 2px solid transparent;
+  border-radius: 5px;
   background: white;
-  color: purple;
-  transition: .5s;
-  border: 3px solid white;
+  cursor: pointer;
+  transition: .4s;
+}
+.teclas button:hover {
+  color: white;
+  background: black;
+  transition: .7s;
+}
+#categoria {
+  margin-top: 1rem;
+  font-size: 1.5rem;
 }
