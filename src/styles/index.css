@@ -62,15 +62,6 @@ font-size: 2rem;
   display: block;
 }
 
-/* #palavra-sorteada span:nth-child(1n)::after{
-  content: '';
-  border: 1px solid white;
-  width: 1.75rem;
-  top: 35px;
-  margin-left: -1.5rem;
-  position: absolute;
-} */
-
 #teclado {
   margin-top: 1rem;
   display: flex;
@@ -91,9 +82,14 @@ font-size: 2rem;
   border: 2px solid transparent;
   border-radius: 5px;
   background: white;
-  cursor: pointer;
-  transition: .4s;
+  transition: 0.5s;
 }
+
+.teclas button:disabled{
+  background: black;
+  color: white;
+}
+
 .teclas button:hover {
   color: white;
   background: black;
@@ -103,3 +99,4 @@ font-size: 2rem;
   margin-top: 1rem;
   font-size: 1.5rem;
 }
+

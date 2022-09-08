@@ -116,7 +116,7 @@ const palavras = [
     category: 'TECNOLOGIAS',
   }),
   (word30 = {
-    name: 'html',
+    name: 'HTML',
     category: 'TECNOLOGIAS',
   }),
 ];
@@ -129,6 +129,12 @@ const palavraSorteadaContainer = document.querySelector(
   '[data-palavra-sorteada]',
 );
 const palavraErradaContainer = document.querySelector('[data-palavra-errada]');
+const imagemContainer = document.querySelector('[data-imagem-forca]');
+const myModalAlternative = new bootstrap.Modal('#modalwin');
+const bodyElement = document.querySelector('[data-modal-body]');
+const tituloElement = document.querySelector('[data-modal-tittle]');
+
+const btnReset = document.querySelector('[data-btn-reset]');
 
 // Sortear index da palavra e categoria secreta
 const palavraIndex = parseInt(Math.random() * palavras.length);
@@ -141,6 +147,7 @@ console.log(palavraSorteada);
 //Array Dinamico de Palavras;
 let novoArrayDinamico = [];
 let letrasErradas = [];
+let tentativas = 6;
 
 // Funções
 
@@ -148,12 +155,12 @@ let letrasErradas = [];
 
 function startGame() {
   const arrayStart = palavraSorteada.split('');
+  imagemContainer.innerHTML = `<img src="imagens/forca.png" alt="Forca" />`;
 
   arrayStart.forEach((letra) => {
     palavraSorteadaContainer.innerHTML += `<span>_</span>`;
   });
 }
-// Função para começar o jogo;
 startGame();
 
 // Mostrar a categoria sorteada
@@ -177,7 +184,7 @@ function mostrarLetraTela(letra, arrayPalavraSorteada) {
 
 // Função para mostrar letras erradas
 
-function mostrarLetraErrada(letra) {
+function mostrarLetraErrada() {
   palavraErradaContainer.innerHTML = '';
 
   letrasErradas.forEach((letra) => {
@@ -185,10 +192,68 @@ function mostrarLetraErrada(letra) {
   });
 }
 
+function carregarImagem() {
+  switch (tentativas) {
+    case 5:
+      imagemContainer.innerHTML = `<img src="imagens/forca01.png" alt="Forca" />`;
+      break;
+    case 4:
+      imagemContainer.innerHTML = `<img src="imagens/forca02.png" alt="Forca" />`;
+      break;
+    case 3:
+      imagemContainer.innerHTML = `<img src="imagens/forca03.png" alt="Forca" />`;
+      break;
+    case 2:
+      imagemContainer.innerHTML = `<img src="imagens/forca04.png" alt="Forca" />`;
+      break;
+    case 1:
+      imagemContainer.innerHTML = `<img src="imagens/forca05.png" alt="Forca" />`;
+      break;
+    case 0:
+      imagemContainer.innerHTML = `<img src="imagens/forca06.png" alt="Forca" />`;
+      break;
+    default:
+      imagemContainer.style.background = "url('./imagens/forca.png')";
+  }
+}
+
+function imagemForca(letra) {
+  const pos = palavraSorteada.indexOf(letra);
+
+  if (pos < 0) {
+    tentativas--;
+    carregarImagem();
+  }
+}
+//Função para acabar o jogo
+function appendModal(titulo, body) {
+  bodyElement.innerText = body;
+
+  tituloElement.innerText = titulo;
+
+  myModalAlternative.show();
+}
+
+function endGame(arrayPalavraSorteada) {
+  if (novoArrayDinamico.length === arrayPalavraSorteada.length) {
+    // modal vitoria
+    appendModal(`Você Ganhou!`, `Parabéns, continue assim!`);
+  } else if (tentativas === 0) {
+    // modal derrota
+    appendModal(`Você Perdeu!`, `A palavra secreta era ${palavraSorteada}`);
+  }
+}
+
 // Função para o evento de clique
 
 function handleClick(e) {
+  // selecionando o innerText dos buttons;
   let letra = e.target.innerText;
+
+  // deixar o botão desabilitado após o clique
+  let letraMomento = e.target;
+
+  letraMomento.disabled = 'true';
 
   //Transformar a palavra sorteada e a categirua em um array com cada letra da palavra;
   const arrayPalavraSorteada = palavraSorteada.split('');
@@ -201,10 +266,20 @@ function handleClick(e) {
     letrasErradas.push(letra);
     mostrarLetraErrada(letra);
   }
+
+  // mostrar imagem da forca a cada tentativa errada
+  imagemForca(letra);
+
+  // função para acabar o jogo
+  endGame(arrayPalavraSorteada);
 }
 
 //Eventos
 
 allButtons.forEach((btn) => {
   btn.addEventListener('click', handleClick);
+});
+
+btnReset.addEventListener('click', () => {
+  window.location.reload();
 });

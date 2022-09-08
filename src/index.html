@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   <link rel="stylesheet" href="styles/index.css">
   <script src="js/index.js" defer></script>
 </head>
@@ -17,14 +18,11 @@
   <div id="main-content">
     <h1>Jogo da Forca</h1>
     <div id="imagem-categoria-container">
-      <div id="imagem-forca">
-        <img src="imagens/forca.png" alt="Forca" />
+      <div data-imagem-forca id="imagem-forca">
       </div>
       <div id="categoria-container">
         <h2>Palavras Erradas</h2>
         <div data-palavra-errada id="categoria-palavras">
-          <!-- <span>A</span>
-          <span>B</span> -->
         </div>
       </div>
     </div>
@@ -74,9 +72,30 @@
     <div data-palavra-categoria id="categoria">
     </div>
 
-    <!-- MODAL  -->
 
-  </div>
+    <div id="modalwin" class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 data-modal-tittle class="modal-title"></h5>
+          </div>
+          <div data-modal-body class="modal-body">
+            <p></p>
+          </div>
+          <div class="modal-footer">
+            <button data-btn-reset type="button" class="btn btn-warning" data-bs-dismiss="modal">Jogar Novamente</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+
+
+
+    <!-- MODAL  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 
 </html>
